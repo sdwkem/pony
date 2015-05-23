@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+        <div class="container">
+            <h1 style="text-align:center;">Лабораторная работа №2</h1>
+
+            <h2>Журнал работников</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Фамилия</th>
+                    <th>Имя</th>
+                    <th>Отчество</th>
+                    <th>Должность</th>
+                </tr>
+                </thead>
+                <tbody>
+                     {% for workers in work %}
+                        <tr>
+                            <th scope="row">{{workers.id}}</th>
+                            <td>{{workers.surname}}</td>
+                            <td>{{workers.name}}</td>
+                            <td>{{workers.fname}}</td>
+                            <td>{{workers.office}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h2>Техника</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Тип</th>
+                  <th>Модель</th>
+                  <th>Цена за час</th>
+                  <th>Состояние</th>
+                  <th>Наличие</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for technique in tec %}
+                        <tr>
+                            <th scope="row">{{technique.id}}</th>
+                            <td>{{technique.typ}}</td>
+                            <td>{{technique.model}}</td>
+                            <td>{{technique.price}}</td>
+                            <td>{{technique.condition}}</td>
+                            <td>{{technique.availability}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h2>ЖУРНАЛ СДАЧИ ТЕХНИКИ</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>сумма</th>
+                  <th>ID техники</th>
+                  <th>ФИО</th>
+                  <th>время взятия</th>
+                  <th>время возвращния</th>
+                  <th>сдача техники</th>
+                  <th>опоздание</th>
+                  <th>тип документа</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for cdacha_list in sdacha %}
+                        <tr>
+                            <th scope="row">{{cdacha_list.id}}</th>
+                            <td>{{cdacha_list.summae}}</td>
+                            <td>{{cdacha_list.ID_tec}}</td>
+                            <td>{{cdacha_list.fio}}</td>
+                            <td>{{cdacha_list.vzitie}}</td>
+                            <td>{{cdacha_list.vozvr}}</td>
+                            <td>{{cdacha_list.cdacha}}</td>
+                            <td>{{cdacha_list.opozd}}</td>
+                            <td>{{cdacha_list.document}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+	</body>
+</html>
