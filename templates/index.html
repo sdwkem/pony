@@ -9,9 +9,19 @@
 	</head>
 	<body>
         <div class="container">
-            <h1 style="text-align:center;">Лабораторная работа №2</h1>
+            <h1 style="text-align:center;">Лабораторная работа №3</h1>
 
             <h2>Журнал работников</h2>
+            <h4>Скрафтить нового работника</h4>
+            <form action="/Journal_workers/" method=post>
+                Фамилия <input type=text name="surname" size=20, height=100%>
+                Имя <input type=text name="name" size=20, height=100%>
+                Отчество <input type=text name="fname" size=20, height=100%>
+                Должность <input type=text name="office" size=20, height=100%>
+                    {% csrf_token %}
+
+                    <input type="submit"/>
+                </form>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -30,12 +40,27 @@
                             <td>{{workers.name}}</td>
                             <td>{{workers.fname}}</td>
                             <td>{{workers.office}}</td>
+                            <td><form action='/delete_work/' method=post>
+                                {% csrf_token %}
+                                  <button name="delete_work" value="{{workers.id}}">Удалить</button>
+                                 </form></td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
 
             <h2>Техника</h2>
+            <h4>Добавить технику</h4>
+            <form action="/Journal_technicks/" method="post">
+                Тип =  <input type=text name="typ" size=20 height=100% >
+                Модель =  <input type=text name="model" size=30 height=100% >
+                Цена за час =  <input type=text name="price" size=20 height=100% >
+                Состояние (True или False) =  <input type=text name="condition" size=5 height=100% >
+                Наличие (True или False) =  <input type=text name="availability" size=5 height=100% >
+                {% csrf_token %}
+
+                <input type="submit">
+            </form>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -56,11 +81,32 @@
                             <td>{{technique.price}}</td>
                             <td>{{technique.condition}}</td>
                             <td>{{technique.availability}}</td>
+                            <td><form action='/delete_work/' method=post>
+                                 {% csrf_token %}
+                                  <button name="delete_work" value="{{technique.id}}">Удалить</button>
+                                 </form></td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
             <h2>ЖУРНАЛ СДАЧИ ТЕХНИКИ</h2>
+            <h4>Выдать технику в прокат</h4>
+            <form action="/Journal_sdacha/" method=post>
+                заплаченная сумма <input type=text name="summa" size=20 height=100% >
+                ID техники <input type=text name="ID_tec" size=20 height=100% >
+                ФИО берущего технику в прокат <input type=text name="fio" size=20 height=100% >
+                <h4>время взятия и возвращения (не реальное, а вычисленное)</h4>
+                <h4>Время указывать в формате : HH:MM </h4>
+                время взяития <input type=text name="vzitie" size=20 height=100% >
+                время возвращения <input type=text name="vozvr" size=20 height=100% >
+                Была ли сдана техника? (True or False) <input type=text name="cdacha" size=5 height=100% >
+                <h4>Время указывать в формате : HH:MM </h4>
+                Время опоздания (если его не было все равно указывать) <input type=text name="opozd" size=20 height=100% >
+                тип документа берущего в прокат <input type=text name="document" size=20 height=100% >
+                    {% csrf_token %}
+
+                    <input type="submit"/>
+                </form>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -79,7 +125,7 @@
                     {% for cdacha_list in sdacha %}
                         <tr>
                             <th scope="row">{{cdacha_list.id}}</th>
-                            <td>{{cdacha_list.summae}}</td>
+                            <td>{{cdacha_list.summa}}</td>
                             <td>{{cdacha_list.ID_tec}}</td>
                             <td>{{cdacha_list.fio}}</td>
                             <td>{{cdacha_list.vzitie}}</td>
@@ -87,6 +133,10 @@
                             <td>{{cdacha_list.cdacha}}</td>
                             <td>{{cdacha_list.opozd}}</td>
                             <td>{{cdacha_list.document}}</td>
+                            <td><form action='/delete_sdacha/' method=post>
+                                {% csrf_token %}
+                                  <button name="delete_ticket" value="{{cdacha.id}}">Удалить</button>
+                                </form></td>
                         </tr>
                     {% endfor %}
                 </tbody>
